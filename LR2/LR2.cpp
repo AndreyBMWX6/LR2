@@ -8,9 +8,8 @@
 Vector& operator+(Vector& v2, double* p)
 {
 	int n = v2.n;
-	Vector a(v2.p, v2.n);
-	for (int i = 0; i < n; i++) a.p[i] += p[i];
-	return a;
+	for (int i = 0; i < n; i++) v2[i] += p[i];
+	return v2;
 }
 
 std :: ostream& operator<<(ostream& out, Vector& V)
@@ -24,9 +23,10 @@ std :: ostream& operator<<(ostream& out, Vector& V)
 std :: istream& operator>>(istream& in, Vector& V)
 {
 	in >> V.n;
-	in.ignore(2, '\n');
+	cin.ignore(2, '\n');
+	V.p = new double(V.n);
 	for (int i = 0; i < V.n; i++)
-		in >> V.p[i];
+		in >> V[i];
 	return in;
 }
 
@@ -69,16 +69,16 @@ int main()
 	ofstream fout("output.txt");
 	fout << v3;
 	fout.close();
-	// ljgbcfnm pltcm ///////////////////////////////
+	cout << "Vvedite vector:\n";
 	cin >> n;
+	cin.ignore(2, '\n');
 	p = new double[n];
 	for (int i = 0; i < n; i++)
 	{
 		cin >> p[i];
 	}
 	Vector a1(p, n);
-	Vector a2;
-	a2 = a1 + p;
+	Vector a2 = a1 + p;
 	cout << endl << a2;
 }
 
